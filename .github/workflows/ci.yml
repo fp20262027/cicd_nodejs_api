@@ -1,3 +1,4 @@
+
 name: CI
 
 on:
@@ -14,24 +15,25 @@ jobs:
   quality:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+
     steps:
-      - name: Descargar el codigo
+      - name: Descargar el código
         uses: actions/checkout@v4
+
       - name: Preparar Node
         uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: npm
+
       - name: Instalar dependencias
         run: npm ci
 
       - name: Lint
         run: npm run lint
 
-      - name: format
-        run: npm run format:check 
+      - name: Format Check
+        run: npm run format:check
 
-      - name: test
-        run: npm run Test:unit
-
-      # TODO: tres steps distintos: lint, format:check y test:unit
+      - name: Unit Tests
+        run: npm run test:unit
